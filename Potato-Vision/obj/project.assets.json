@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "Visual_Object/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Visual_Object.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Visual_Object.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Visual_Object/1.0.0": {
+      "type": "project",
+      "path": "../Visual_Object/Visual_Object.csproj",
+      "msbuildProject": "../Visual_Object/Visual_Object.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "Visual_Object >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Wafi\\.nuget\\packages\\": {}
@@ -13,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj",
+      "projectUniqueName": "C:\\Kuliah\\Semester 3\\oop\\potato_visiob\\Potato-Vision\\Potato-Vision.csproj",
       "projectName": "Potato-Vision",
-      "projectPath": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj",
+      "projectPath": "C:\\Kuliah\\Semester 3\\oop\\potato_visiob\\Potato-Vision\\Potato-Vision.csproj",
       "packagesPath": "C:\\Users\\Wafi\\.nuget\\packages\\",
-      "outputPath": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\obj\\",
+      "outputPath": "C:\\Kuliah\\Semester 3\\oop\\potato_visiob\\Potato-Vision\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Wafi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Kuliah\\Semester 3\\oop\\potato_visiob\\Visual_Object\\Visual_Object.csproj": {
+              "projectPath": "C:\\Kuliah\\Semester 3\\oop\\potato_visiob\\Visual_Object\\Visual_Object.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -64,7 +87,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
