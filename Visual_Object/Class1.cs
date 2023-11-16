@@ -82,5 +82,20 @@ namespace Visual_Object
 
     }
 
+    public class SaveData
+    {
+
+        public int AcceptView { get; set; }
+        public int RejectView { get; set; }
+
+        public int total { get; private set; }
+
+        public void Total()
+        {
+            total = this.AcceptView + this.RejectView;
+        }
+
+
+    }
 
 }
