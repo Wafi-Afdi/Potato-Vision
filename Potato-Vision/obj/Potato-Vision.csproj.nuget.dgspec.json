@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj": {}
+    "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj": {}
   },
   "projects": {
-    "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj": {
+    "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj",
         "projectName": "Potato-Vision",
-        "projectPath": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj",
-        "packagesPath": "C:\\Users\\Wafi\\.nuget\\packages\\",
-        "outputPath": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Potato-Vision\\obj\\",
+        "projectPath": "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Potato-Vision\\Potato-Vision.csproj",
+        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Potato-Vision\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Wafi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Visual_Object\\Visual_Object.csproj": {
-                "projectPath": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Visual_Object\\Visual_Object.csproj"
+              "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Visual_Object\\Visual_Object.csproj": {
+                "projectPath": "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Visual_Object\\Visual_Object.csproj"
               }
             }
           }
@@ -62,21 +67,25 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Visual_Object\\Visual_Object.csproj": {
+    "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Visual_Object\\Visual_Object.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Visual_Object\\Visual_Object.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Visual_Object\\Visual_Object.csproj",
         "projectName": "Visual_Object",
-        "projectPath": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Visual_Object\\Visual_Object.csproj",
-        "packagesPath": "C:\\Users\\Wafi\\.nuget\\packages\\",
-        "outputPath": "D:\\Kuliah\\semester3\\oop\\file program\\testing entity\\wpf-project\\Potato-Vision\\Visual_Object\\obj\\",
+        "projectPath": "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Visual_Object\\Visual_Object.csproj",
+        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Acer\\Desktop\\Potato-Vision\\Visual_Object\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Wafi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,6 +93,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -117,7 +127,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
