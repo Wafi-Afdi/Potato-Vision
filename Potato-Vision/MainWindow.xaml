@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Potato_Vision"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        MinHeight="400" MinWidth="800"
+        SizeToContent="WidthAndHeight"
+        >
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="21*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="31*"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Grid.Row="1" x:Name="Upload_Button" Content="Browse Image" Click="Button_Click" Width="109" FontSize="10" HorizontalAlignment="Left" Margin="30,20,0,0" Panel.ZIndex="2" Height="20" VerticalAlignment="Top"/>
+        <Button Grid.Column="0" Grid.Row="1" x:Name="Start_Button" Content="Start" Click="Start_Click" Width="109" Height="20" FontSize="10" HorizontalAlignment="Left" Margin="30,54,0,0" Panel.ZIndex="2" VerticalAlignment="Top"/>
+        <Border Background="#FF372C2C" Height="225" Width="400">
+            <Image Grid.Column="0" Grid.Row="0" x:Name="Image_Display"  Panel.ZIndex="2"  Source="/breakingbadjpg-edf703b528d94cc4.jpg"/>
+        </Border>
+        <Label Grid.Row="1" Grid.Column="0"  Margin="144,18,0,0" VerticalAlignment="Top" FontSize="10" HorizontalAlignment="Left" Width="329" MaxWidth="326" >
+            <TextBlock TextTrimming="CharacterEllipsis">Hello World</TextBlock>
+        </Label>
+        <StackPanel Grid.Column="1">
+        </StackPanel>
     </Grid>
+
 </Window>
