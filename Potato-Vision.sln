@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Potato-Vision", "Potato-Vision\Potato-Vision.csproj", "{465C2DF7-914E-40E9-9BB4-FE0F4FA2C63E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visual_Object", "Visual_Object\Visual_Object.csproj", "{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Visual_Object", "Visual_Object\Visual_Object.csproj", "{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing", "ImageProcessing\ImageProcessing.csproj", "{064814E0-67DE-4EA0-8160-92D27CE18C3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{064814E0-67DE-4EA0-8160-92D27CE18C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{064814E0-67DE-4EA0-8160-92D27CE18C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{064814E0-67DE-4EA0-8160-92D27CE18C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{064814E0-67DE-4EA0-8160-92D27CE18C3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
