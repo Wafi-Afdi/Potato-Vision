@@ -9,7 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="636b5765126337.5b0aa701b50d3.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing\ImageProcessing.csproj" />
     <ProjectReference Include="..\Visual_Object\Visual_Object.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="636b5765126337.5b0aa701b50d3.jpg" />
   </ItemGroup>
 
 </Project>
