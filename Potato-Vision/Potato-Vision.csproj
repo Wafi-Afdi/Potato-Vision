@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="4co4m2.png" />
     <None Remove="636b5765126337.5b0aa701b50d3.jpg" />
   </ItemGroup>
 
@@ -18,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="4co4m2.png" />
     <Resource Include="636b5765126337.5b0aa701b50d3.jpg" />
   </ItemGroup>
 
