@@ -53,9 +53,7 @@ namespace ImageProcessingTest
         {
             ProcessImage processImage = GetAppleTest();
 
-            List<int> expectedAcceptedIndices = new List<int>();
-            expectedAcceptedIndices.Add(1);
-            expectedAcceptedIndices.Add(3);
+            List<int> expectedAcceptedIndices = new List<int>() { 1, 3 };
 
             List<int> actualAcceptedIndices = processImage.GetAcceptedIndices();
 
@@ -67,9 +65,7 @@ namespace ImageProcessingTest
         {
             ProcessImage processImage = GetAppleTest();
 
-            List<int> expectedRejectedIndices = new List<int>();
-            expectedRejectedIndices.Add(0);
-            expectedRejectedIndices.Add(2);
+            List<int> expectedRejectedIndices = new List<int>() { 0, 2 };
 
             List<int> actualRejectedIndices = processImage.GetRejectedIndices();
 
