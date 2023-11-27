@@ -16,8 +16,7 @@ namespace ImageProcessingTest
             int[] accepted = { 28, 30, 32, 36, 255, 255 };
             int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
 
-            List<int[]> rejectedList = new List<int[]>();
-            rejectedList.Add(rejected1);
+            List<int[]> rejectedList = new List<int[]> { rejected1 };
 
             ProcessImage processImage =  new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
 
