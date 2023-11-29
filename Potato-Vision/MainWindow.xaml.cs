@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,17 +31,45 @@ namespace Potato_Vision
         private int? Tolak;
         private int? Total;
 
+        private ProcessImage _processImage;
 
         private TargetObject? Target_Visual;
 
 
+        static BitmapImage ConvertBitmapToBitmapImage(System.Drawing.Bitmap bitmap)
+        {
+            var memory = new MemoryStream();
+            bitmap.Save(memory, ImageFormat.Png);
 
+            memory.Position = 0;
+
+
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = memory;
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.EndInit();
+            bitmapImage.Freeze();
+
+            return bitmapImage;
+        }
 
         public MainWindow()
         {
          
+            // Deklarasi sementara
+            int[] accepted = { 28, 30, 32, 36, 255, 255 };
+            int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
+
+            List<int[]> rejectedList = new List<int[]> { rejected1 };
+
+            _processImage = new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
+            // 
+
+
             InitializeComponent();
             Image_Display.Visibility = System.Windows.Visibility.Hidden;
+
         }
 
         private void Browse_Image(object sender, RoutedEventArgs e)
@@ -55,7 +84,12 @@ namespace Potato_Vision
             if (response == true)
             {
                 filePath = openFileDialog.FileName;
-                ImageBrowsed = new BitmapImage(new Uri(filePath));
+
+                _processImage.SetInputImage(filePath);
+
+                //ImageBrowsed = new BitmapImage(new Uri(filePath));
+                ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
+
                 placeholder_text.Visibility = System.Windows.Visibility.Collapsed;
                 Image_Display.Visibility = System.Windows.Visibility.Visible;
                 Image_Display.Source = ImageBrowsed;

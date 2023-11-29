@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -137,7 +138,8 @@ namespace ImageProcessing
             if (this._originalImage.Empty()) return;
 
             this._originalImageCopy = this._originalImage.Clone();
-            
+            this._annotatedImage = this._originalImage.Clone();
+
             if (this._method == ColorSpaceMethod.HSV)
             {
                 Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
@@ -153,6 +155,7 @@ namespace ImageProcessing
             if (this._originalImage.Empty()) return;
 
             this._originalImageCopy = this._originalImage.Clone();
+            this._annotatedImage = this._originalImage.Clone();
 
             if (this._method == ColorSpaceMethod.HSV)
             {
@@ -164,7 +167,7 @@ namespace ImageProcessing
 
         public List<int> GetAcceptedIndices()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -174,7 +177,7 @@ namespace ImageProcessing
 
         public List<int> GetRejectedIndices()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -184,7 +187,7 @@ namespace ImageProcessing
 
         public int GetAcceptedCount()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -194,7 +197,7 @@ namespace ImageProcessing
 
         public int GetRejectedCount()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -204,7 +207,7 @@ namespace ImageProcessing
 
         public Mat GetAnnotatedImage()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -214,7 +217,7 @@ namespace ImageProcessing
 
         public Mat GetOriginalImage()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -224,7 +227,7 @@ namespace ImageProcessing
 
         public System.Drawing.Bitmap GetOriginalBitmapImage()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -236,14 +239,14 @@ namespace ImageProcessing
 
         public System.Drawing.Bitmap GetAnnotatedBitmapImage()
         {
-            if (!this._originalImage.Empty())
+            if (this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
 
-            System.Drawing.Bitmap bitmap = this._annotatedImage.ToBitmap();
+            System.Drawing.Bitmap myimage = BitmapConverter.ToBitmap(this._annotatedImage);
 
-            return bitmap;
+            return myimage;
         }
     }
 }
