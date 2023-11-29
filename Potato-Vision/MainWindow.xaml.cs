@@ -25,10 +25,13 @@ namespace Potato_Vision
     public partial class MainWindow : Window
     {
         private BitmapImage? ImageBrowsed;
-        private string filePath = "";
+        private string? filePath;
         private int? Terima;
         private int? Tolak;
         private int? Total;
+
+
+        private TargetObject? Target_Visual;
 
 
 
@@ -65,7 +68,7 @@ namespace Potato_Vision
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             // jika file path ga ditemukan dan bitmap masih null
-            if (filePath == "" && ImageBrowsed == null)
+            if (filePath == null && ImageBrowsed == null)
             {
                 MessageBox.Show("Please Browse an Image First");
             }
@@ -74,7 +77,7 @@ namespace Potato_Vision
         {
             SaveFileDialog save = new SaveFileDialog();
             // jika file path ga ditemukan dan bitmap masih null
-            if (filePath == "" && ImageBrowsed == null)
+            if (filePath == null && ImageBrowsed == null)
             {
                 MessageBox.Show("Please Browse an Image First");
             } else
