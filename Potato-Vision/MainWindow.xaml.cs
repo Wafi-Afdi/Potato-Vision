@@ -27,9 +27,9 @@ namespace Potato_Vision
     {
         private BitmapImage? ImageBrowsed;
         private string? filePath;
-        private int? Terima;
-        private int? Tolak;
-        private int? Total;
+        //private int? Terima;
+        //private int? Tolak;
+        //private int? Total;
 
         private ProcessImage _processImage;
 
@@ -42,7 +42,6 @@ namespace Potato_Vision
             bitmap.Save(memory, ImageFormat.Png);
 
             memory.Position = 0;
-
 
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
@@ -57,7 +56,7 @@ namespace Potato_Vision
         public MainWindow()
         {
          
-            // Deklarasi sementara
+            // Nilai Range sementara
             int[] accepted = { 28, 30, 32, 36, 255, 255 };
             int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
 
