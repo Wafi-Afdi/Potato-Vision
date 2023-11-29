@@ -17,8 +17,6 @@ namespace ImageProcessing
 
     public class ProcessImage
     {
-        private bool _assigned = false;
-
         private int[] _acceptedRange;
         private List<int[]> _rejectedRange;
 
@@ -55,48 +53,6 @@ namespace ImageProcessing
             this._rejectedXPosition = new List<int>();
             this._acceptedIndices = new List<int>();
             this._rejectedIndices = new List<int>();
-    }
-
-        private void SetImage(String path)
-        {
-            this._originalImage = Cv2.ImRead(path);
-
-            if (this._originalImage.Empty())
-            {
-                throw new Exception("Image is empty!");
-            }
-
-            this._assigned = true;
-            this._annotatedImage = this._originalImage.Clone();
-
-            if (this._method == ColorSpaceMethod.HSV)
-            {
-                Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
-            }
-
-            this._acceptedXPosition = new List<int>();
-            this._rejectedXPosition = new List<int>();
-        }
-
-        private void SetImage(Mat image)
-        {
-            this._originalImage = image.Clone();
-
-            if (this._originalImage.Empty())
-            {
-                throw new Exception("Image is empty!");
-            }
-
-            this._assigned = true;
-            this._annotatedImage = this._originalImage.Clone();
-
-            if (this._method == ColorSpaceMethod.HSV)
-            {
-                Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
-            }
-
-            this._acceptedXPosition = new List<int>();
-            this._rejectedXPosition = new List<int>();
         }
 
         private Mat Segment(int[] range)
@@ -172,19 +128,35 @@ namespace ImageProcessing
 
         public void SetInputImage(String path)
         {
-            this.SetImage(path);
+            this._originalImage = Cv2.ImRead(path);
+
+            if (this._originalImage.Empty()) return;
+            
+            if (this._method == ColorSpaceMethod.HSV)
+            {
+                Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
+            }
+
             this.Processing();
         }
 
         public void SetInputImage(Mat image)
         {
-            this.SetImage(image);
+            this._originalImage = image.Clone();
+
+            if (this._originalImage.Empty()) return;
+
+            if (this._method == ColorSpaceMethod.HSV)
+            {
+                Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
+            }
+
             this.Processing();
         }
 
         public List<int> GetAcceptedIndices()
         {
-            if (!this._assigned)
+            if (!this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -194,7 +166,7 @@ namespace ImageProcessing
 
         public List<int> GetRejectedIndices()
         {
-            if (!this._assigned)
+            if (!this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -204,7 +176,7 @@ namespace ImageProcessing
 
         public int GetAcceptedCount()
         {
-            if (!this._assigned)
+            if (!this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -214,7 +186,7 @@ namespace ImageProcessing
 
         public int GetRejectedCount()
         {
-            if (!this._assigned)
+            if (!this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
@@ -224,7 +196,7 @@ namespace ImageProcessing
 
         public Mat GetAnnotatedImage()
         {
-            if (!this._assigned)
+            if (!this._originalImage.Empty())
             {
                 throw new Exception("Image has not been assigned");
             }
