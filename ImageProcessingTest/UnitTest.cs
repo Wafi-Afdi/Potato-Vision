@@ -3,7 +3,7 @@ using ImageProcessing;
 namespace ImageProcessingTest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest
     {
         private String GetPath(String imageName)
         {
