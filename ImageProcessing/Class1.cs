@@ -229,7 +229,7 @@ namespace ImageProcessing
                 throw new Exception("Image has not been assigned");
             }
 
-            System.Drawing.Bitmap bitmap = this._orginalImageCopy.ToBitmap();
+            System.Drawing.Bitmap bitmap = this._originalImageCopy.ToBitmap();
 
             return bitmap;
         }
