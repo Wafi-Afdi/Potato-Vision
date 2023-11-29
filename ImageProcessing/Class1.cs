@@ -21,6 +21,7 @@ namespace ImageProcessing
         private List<int[]> _rejectedRange;
 
         private Mat _originalImage;
+        private Mat _originalImageCopy;
         private Mat _annotatedImage;
         private Mat _acceptedBinaryImage;
         private List<Mat> _rejectedBinaryImage;
@@ -46,6 +47,7 @@ namespace ImageProcessing
             this._method = method;
 
             this._originalImage = new Mat();
+            this._originalImageCopy = new Mat();
             this._annotatedImage = new Mat();
             this._acceptedBinaryImage = new Mat();
             this._rejectedBinaryImage = new List<Mat>();
@@ -131,6 +133,8 @@ namespace ImageProcessing
             this._originalImage = Cv2.ImRead(path);
 
             if (this._originalImage.Empty()) return;
+
+            this._originalImageCopy = this._originalImage.Clone();
             
             if (this._method == ColorSpaceMethod.HSV)
             {
@@ -145,6 +149,8 @@ namespace ImageProcessing
             this._originalImage = image.Clone();
 
             if (this._originalImage.Empty()) return;
+
+            this._originalImageCopy = this._originalImage.Clone();
 
             if (this._method == ColorSpaceMethod.HSV)
             {
@@ -202,6 +208,16 @@ namespace ImageProcessing
             }
 
             return this._annotatedImage.Clone();
+        }
+
+        public Mat GetOriginalImage()
+        {
+            if (!this._originalImage.Empty())
+            {
+                throw new Exception("Image has not been assigned");
+            }
+
+            return this._originalImageCopy.Clone();
         }
     }
 }
