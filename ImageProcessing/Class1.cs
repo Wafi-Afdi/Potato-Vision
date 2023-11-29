@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using OpenCvSharp;
+using OpenCvSharp.Extensions;
+using OpenCvSharp.Internal;
 
 namespace ImageProcessing
 {
@@ -218,6 +220,30 @@ namespace ImageProcessing
             }
 
             return this._originalImageCopy.Clone();
+        }
+
+        public System.Drawing.Bitmap GetOriginalBitmapImage()
+        {
+            if (!this._originalImage.Empty())
+            {
+                throw new Exception("Image has not been assigned");
+            }
+
+            System.Drawing.Bitmap bitmap = this._orginalImageCopy.ToBitmap();
+
+            return bitmap;
+        }
+
+        public System.Drawing.Bitmap GetAnnotatedBitmapImage()
+        {
+            if (!this._originalImage.Empty())
+            {
+                throw new Exception("Image has not been assigned");
+            }
+
+            System.Drawing.Bitmap bitmap = this._annotatedImage.ToBitmap();
+
+            return bitmap;
         }
     }
 }
