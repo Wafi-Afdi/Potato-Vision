@@ -39,8 +39,8 @@ namespace Visual_Object
         // Statik variable untuk dipakai
         private static int[] RedAppleBound = { 1, 2, 3, 4, 5, 6 };
         private static int[] GreenAppleBound = { 1, 2, 3, 4, 5, 6 };
-        private static ColorTarget RedApple = new ColorTarget(VisualTargetSelection.Apple, RedAppleBound, "Red Apple");
-        private static ColorTarget GreenApple = new ColorTarget(VisualTargetSelection.Apple, GreenAppleBound, "Green Apple");
+        private static ColorTarget RedApple = new ColorTarget(VisualTargetSelection.Apple, RedAppleBound, "Red");
+        private static ColorTarget GreenApple = new ColorTarget(VisualTargetSelection.Apple, GreenAppleBound, "Green");
 
         private static List<ColorTarget> AppleTarget = new List<ColorTarget> { RedApple, GreenApple }; // Target List untuk Apple
         private static List<ColorTarget> GrapeTarget = new List<ColorTarget> { }; // Target List untuk anggur
