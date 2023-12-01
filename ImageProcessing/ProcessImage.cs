@@ -217,7 +217,7 @@ namespace ImageProcessing
             return this._originalImageCopy!.Clone();
         }
 
-        public System.Drawing.Bitmap GetOriginalBitmapImage()
+        public System.Drawing.Bitmap GetOriginalBitmap()
         {
             if (this._originalImage.Empty())
             {
@@ -229,7 +229,7 @@ namespace ImageProcessing
             return bitmap;
         }
 
-        public System.Drawing.Bitmap GetAnnotatedBitmapImage()
+        public System.Drawing.Bitmap GetAnnotatedBitmap()
         {
             if (this._originalImage.Empty())
             {
