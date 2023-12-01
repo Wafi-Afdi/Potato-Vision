@@ -18,7 +18,7 @@ namespace ImageProcessingTest
 
             List<int[]> rejectedList = new List<int[]> { rejected1 };
 
-            ProcessImage processImage =  new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
+            ProcessImage processImage =  new ProcessImage(accepted, rejectedList);
 
             String imagePath = GetPath("apple.jpg");
             processImage.SetInputImage(imagePath);

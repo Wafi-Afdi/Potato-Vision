@@ -3,12 +3,6 @@ using OpenCvSharp.Extensions;
 
 namespace ImageProcessing
 {
-    public enum ColorSpaceMethod
-    {
-        BGR,
-        HSV
-    };
-
     public class ProcessImage
     {
         private int[]? _acceptedRange;
@@ -31,8 +25,6 @@ namespace ImageProcessing
         private int _acceptedCount;
         private int _rejectedCount;
 
-        ColorSpaceMethod _method;
-
         public ProcessImage()
         {
             this._originalImage = new();
@@ -41,13 +33,12 @@ namespace ImageProcessing
             this._rejectedXPosition = new();
         }
 
-        public ProcessImage(int[] acceptedRangeArray, List<int[]> rejectedRangeArray, ColorSpaceMethod method)
+        public ProcessImage(int[] acceptedRangeArray, List<int[]> rejectedRangeArray)
         {
             this._acceptedRange = new int[acceptedRangeArray.Length];
             acceptedRangeArray.CopyTo(this._acceptedRange, 0);
 
             this._rejectedRange = new(rejectedRangeArray);
-            this._method = method;
 
 
             this._originalImage = new();
@@ -125,13 +116,12 @@ namespace ImageProcessing
             this.SetIndices();
         }
 
-        public void SetAttributes(int[] acceptedRangeArray, List<int[]> rejectedRangeArray, ColorSpaceMethod method)
+        public void SetAttributes(int[] acceptedRangeArray, List<int[]> rejectedRangeArray)
         {
             this._acceptedRange = new int[acceptedRangeArray.Length];
             acceptedRangeArray.CopyTo(this._acceptedRange, 0);
 
             this._rejectedRange = new(rejectedRangeArray);
-            this._method = method;
         }
 
         public void SetInputImage(String path)
@@ -143,10 +133,8 @@ namespace ImageProcessing
             this._originalImageCopy = this._originalImage.Clone();
             this._annotatedImage = this._originalImage.Clone();
 
-            if (this._method == ColorSpaceMethod.HSV)
-            {
-                Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
-            }
+            Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
+            
 
             this.Processing();
         }
@@ -162,10 +150,9 @@ namespace ImageProcessing
             this._originalImageCopy = this._originalImage.Clone();
             this._annotatedImage = this._originalImage.Clone();
 
-            if (this._method == ColorSpaceMethod.HSV)
-            {
-                Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
-            }
+
+            Cv2.CvtColor(this._originalImage, this._originalImage, ColorConversionCodes.BGR2HSV);
+            
 
             this.Processing();
         }

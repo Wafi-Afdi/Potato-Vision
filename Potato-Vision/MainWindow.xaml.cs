@@ -62,7 +62,7 @@ namespace Potato_Vision
 
             List<int[]> rejectedList = new List<int[]> { rejected1 };
 
-            _processImage = new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
+            _processImage = new ProcessImage(accepted, rejectedList);
             // 
 
 
