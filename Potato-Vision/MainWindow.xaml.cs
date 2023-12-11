@@ -27,13 +27,18 @@ namespace Potato_Vision
     {
         private BitmapImage? ImageBrowsed;
         private string? filePath;
-        //private int? Terima;
-        //private int? Tolak;
-        //private int? Total;
+
 
         private ProcessImage _processImage;
 
         private TargetObject? Target_Visual;
+        private Visual_Object.SaveData? saveData = new SaveData();
+
+        // Nilai Range sementara
+        int[] accepted = { 28, 30, 32, 36, 255, 255 };
+        int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
+
+        List<int[]> rejectedList = new List<int[]> { };
 
 
         static BitmapImage ConvertBitmapToBitmapImage(System.Drawing.Bitmap bitmap)
@@ -56,13 +61,10 @@ namespace Potato_Vision
         public MainWindow()
         {
          
-            // Nilai Range sementara
-            int[] accepted = { 28, 30, 32, 36, 255, 255 };
-            int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
 
             List<int[]> rejectedList = new List<int[]> { rejected1 };
 
-            _processImage = new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
+            _processImage = new();
             // 
 
 
@@ -82,35 +84,66 @@ namespace Potato_Vision
 
             if (response == true)
             {
+                // setup dulu bro gambarnya
                 filePath = openFileDialog.FileName;
 
-                _processImage.SetInputImage(filePath);
+                // _processImage.SetInputImage(filePath);
 
-                //ImageBrowsed = new BitmapImage(new Uri(filePath));
-                ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
+                ImageBrowsed = new BitmapImage(new Uri(filePath));
+                // ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
 
                 placeholder_text.Visibility = System.Windows.Visibility.Collapsed;
                 Image_Display.Visibility = System.Windows.Visibility.Visible;
                 Image_Display.Source = ImageBrowsed;
                 Origin_Display.Text = filePath;
+
             }
 
             
+
+
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             // jika file path ga ditemukan dan bitmap masih null
-            if (filePath == null && ImageBrowsed == null)
+            if (filePath == null || ImageBrowsed == null)
             {
-                MessageBox.Show("Please Browse an Image First");
+                MessageBox.Show("Please Insert an Image First");
+                return;
             }
+
+            // process Image dan loading
+            Image_Display.Visibility = System.Windows.Visibility.Hidden;
+            placeholder_text.Visibility = System.Windows.Visibility.Visible;
+            placeholder_text.Text = "Processing..."; // loading first
+            _processImage.SetAttributes(accepted, rejectedList, ColorSpaceMethod.HSV);
+            _processImage.SetInputImage(filePath);
+            ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
+
+            // display result image
+            placeholder_text.Visibility = System.Windows.Visibility.Collapsed;
+            Image_Display.Visibility = System.Windows.Visibility.Visible;
+            Image_Display.Source = ImageBrowsed;
+
+
+            // save the data
+            saveData.AcceptView = _processImage.GetAcceptedCount();
+            saveData.RejectView = _processImage.GetRejectedCount();
+            saveData.Total();
+
+            // display the data in ui
+            Terima_Display.Text = saveData.AcceptView.ToString();
+            Tolak_Display.Text = saveData.RejectView.ToString();
+            Total_Display.Text = saveData.total.ToString();
         }
+
+
         private void Save_Image(object sender, RoutedEventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
             // jika file path ga ditemukan dan bitmap masih null
-            if (filePath == null && ImageBrowsed == null)
+            if (filePath == null || ImageBrowsed == null)
             {
                 MessageBox.Show("Please Browse an Image First");
             } else
