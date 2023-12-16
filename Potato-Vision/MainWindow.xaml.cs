@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -25,21 +26,36 @@ namespace Potato_Vision
     /// </summary>
     public partial class MainWindow : Window
     {
+
         private BitmapImage? ImageBrowsed;
-        private string? filePath;
+        private UIModel _uiModel = new UIModel();
+        //private int? Terima;
+        //private int? Tolak;
+        //private int? Total;
+        //private int? Terima;
+        private TargetObject _targetVisual;
+        private IList<List<ColorTarget>> collectionInApp = new List<List<ColorTarget>>() { };
+        private List<ColorTarget> colorSelection = new List<ColorTarget>() { };
+        //private int? Total;
+        //private int? Terima;
+        //private int? Tolak;
+        //private int? Total;
+        //private int? Terima;
+        // Data untuk processing image
+        private List<int[]> rejectedList = new List<int[]> { };
+        private int[] accepted = new int[6];
+
+        //private int? Tolak;
+        //private int? Total;
 
 
         private ProcessImage _processImage;
 
         private TargetObject? Target_Visual;
-        private Visual_Object.SaveData? saveData = new SaveData();
 
         // Nilai Range sementara
         int[] accepted = { 28, 30, 32, 36, 255, 255 };
         int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
-
-        List<int[]> rejectedList = new List<int[]> { };
-
 
         static BitmapImage ConvertBitmapToBitmapImage(System.Drawing.Bitmap bitmap)
         {
@@ -49,57 +65,89 @@ namespace Potato_Vision
             memory.Position = 0;
 
             BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.StreamSource = memory;
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            // Nilai Range sementara
+            //int[] accepted = { 28, 30, 32, 36, 255, 255 };
+            //int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
             bitmapImage.EndInit();
             bitmapImage.Freeze();
 
-            return bitmapImage;
+            // _processImage = new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
+            _processImage = new ProcessImage();
         }
 
         public MainWindow()
         {
          
+            // Nilai Range sementara
+            int[] accepted = { 28, 30, 32, 36, 255, 255 };
+            int[] rejected1 = { 171, 74, 56, 255, 255, 255 };
 
-            List<int[]> rejectedList = new List<int[]> { rejected1 };
+            //List<int[]> rejectedList = new List<int[]> { rejected1 };
 
-            _processImage = new();
+            _processImage = new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
             // 
 
 
             InitializeComponent();
+            
             Image_Display.Visibility = System.Windows.Visibility.Hidden;
+            DataContext = _uiModel;
+
+
+            _targetVisual = new TargetObject();
+            collectionInApp = TargetObject.ReadCollectionFruit;
 
         }
-
+                _uiModel.FilePath = openFileDialog.FileName;
+                _uiModel.Done_Visibility= Visibility.Hidden;   
         private void Browse_Image(object sender, RoutedEventArgs e)
-        {
+                ImageBrowsed = new BitmapImage(new Uri(_uiModel.FilePath));
+                // ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
             Microsoft.Win32.OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = false;
 
             bool? response = openFileDialog.ShowDialog();
 
-            if (response == true)
+                Origin_Display.Text = _uiModel.FilePath;
+                
             {
-                // setup dulu bro gambarnya
                 filePath = openFileDialog.FileName;
 
-                // _processImage.SetInputImage(filePath);
+                _processImage.SetInputImage(filePath);
 
-                ImageBrowsed = new BitmapImage(new Uri(filePath));
-                // ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
+                //ImageBrowsed = new BitmapImage(new Uri(filePath));
+                ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
 
                 placeholder_text.Visibility = System.Windows.Visibility.Collapsed;
                 Image_Display.Visibility = System.Windows.Visibility.Visible;
-                Image_Display.Source = ImageBrowsed;
+            if (_uiModel.FilePath == null && ImageBrowsed == null)
                 Origin_Display.Text = filePath;
-
             }
 
             
+
+            // Loading 
+            Image_Display.Visibility = System.Windows.Visibility.Hidden;
+            placeholder_text.Text = "Loading...";
+            placeholder_text.Visibility = System.Windows.Visibility.Visible;
+
+            // Assign dulu
+            _targetVisual.SetTargetColor();
+            accepted = _targetVisual.GetTargetColor();
+            rejectedList = _targetVisual.GetRejectedRange();
+
+
+            // Gas Lakukan Aksi
+            _processImage.SetAttributes(accepted,rejectedList, ColorSpaceMethod.HSV);
+            _processImage.SetInputImage(_uiModel.FilePath!);
+
+            // Display imagenya
+            Image_Display.Source = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
+            Image_Display.Visibility = System.Windows.Visibility.Visible;
+            placeholder_text.Visibility = System.Windows.Visibility.Collapsed;
+            _uiModel.Done_Visibility= Visibility.Visible;
+
+            // Perhitungan
+
 
 
         }
@@ -107,35 +155,11 @@ namespace Potato_Vision
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             // jika file path ga ditemukan dan bitmap masih null
-            if (filePath == null || ImageBrowsed == null)
+            if (_uiModel.FilePath == null && ImageBrowsed == null)
             {
                 MessageBox.Show("Please Insert an Image First");
                 return;
             }
-
-            // process Image dan loading
-            Image_Display.Visibility = System.Windows.Visibility.Hidden;
-            placeholder_text.Visibility = System.Windows.Visibility.Visible;
-            placeholder_text.Text = "Processing..."; // loading first
-            _processImage.SetAttributes(accepted, rejectedList, ColorSpaceMethod.HSV);
-            _processImage.SetInputImage(filePath);
-            ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
-
-            // display result image
-            placeholder_text.Visibility = System.Windows.Visibility.Collapsed;
-            Image_Display.Visibility = System.Windows.Visibility.Visible;
-            Image_Display.Source = ImageBrowsed;
-
-
-            // save the data
-            saveData.AcceptView = _processImage.GetAcceptedCount();
-            saveData.RejectView = _processImage.GetRejectedCount();
-            saveData.Total();
-
-            // display the data in ui
-            Terima_Display.Text = saveData.AcceptView.ToString();
-            Tolak_Display.Text = saveData.RejectView.ToString();
-            Total_Display.Text = saveData.total.ToString();
         }
 
 
@@ -143,7 +167,7 @@ namespace Potato_Vision
         {
             SaveFileDialog save = new SaveFileDialog();
             // jika file path ga ditemukan dan bitmap masih null
-            if (filePath == null || ImageBrowsed == null)
+            if (filePath == null && ImageBrowsed == null)
             {
                 MessageBox.Show("Please Browse an Image First");
             } else
@@ -162,6 +186,42 @@ namespace Potato_Vision
 
             }
 
+        }
+
+        // Fungsi untuk mengubah target terpilih pada dropdown box 
+        private void ChangeSelection(object sender, SelectionChangedEventArgs e)
+        {
+            _uiModel.SelectWarnaList.Clear();
+            _uiModel.SelectedTarget = (VisualTargetSelection) TargetComboBox.SelectedItem;
+            Debug.WriteLine(_uiModel.SelectedTarget);
+            _targetVisual.SettVisualTargetSelection(_uiModel.SelectedTarget);
+
+
+            if (_uiModel.SelectedTarget.HasValue)
+            {
+                // Allow select pada warna
+                colorSelection = collectionInApp.SelectMany(fruitList => fruitList.Where(target => target.target == _uiModel.SelectedTarget)).ToList();
+
+                foreach(ColorTarget color in colorSelection)
+                {
+                    _uiModel.SelectWarnaList.Add(color.ColorName);
+                }
+                _uiModel.WarnaDropdownBool = true;
+            }
+        }
+
+        private void UbahTargetWarna(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                _uiModel.SelectedColor = (String) WarnaComboBox.SelectedItem;
+                Debug.WriteLine(_uiModel.SelectedColor);
+                _targetVisual.SetWarnaDipilih(_uiModel.SelectedColor);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }
