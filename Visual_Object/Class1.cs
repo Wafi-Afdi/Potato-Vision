@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,23 +38,45 @@ namespace Visual_Object
     {
         // Taruh HSV Bound Disini
         // Statik variable untuk dipakai
-        private static int[] RedAppleBound = { 1, 2, 3, 4, 5, 6 };
-        private static int[] GreenAppleBound = { 1, 2, 3, 4, 5, 6 };
+        private static int[] RedAppleBound = { 28, 30, 32, 36, 255, 255 };
+        private static int[] GreenAppleBound = { 171, 74, 56, 255, 255, 255 };
         private static ColorTarget RedApple = new ColorTarget(VisualTargetSelection.Apple, RedAppleBound, "Red");
         private static ColorTarget GreenApple = new ColorTarget(VisualTargetSelection.Apple, GreenAppleBound, "Green");
 
+        private static ColorTarget YellowGrape = new ColorTarget(VisualTargetSelection.Grape, RedAppleBound, "Yellow");
+        private static ColorTarget GreenGrape = new ColorTarget(VisualTargetSelection.Grape, GreenAppleBound, "Green");
+
         private static List<ColorTarget> AppleTarget = new List<ColorTarget> { RedApple, GreenApple }; // Target List untuk Apple
-        private static List<ColorTarget> GrapeTarget = new List<ColorTarget> { }; // Target List untuk anggur
+        private static List<ColorTarget> GrapeTarget = new List<ColorTarget> { YellowGrape, GreenGrape }; // Target List untuk anggur
+
+        public static List<List<ColorTarget>> CollectionFruit = new List<List<ColorTarget>>() { AppleTarget, GrapeTarget}; // Koleksi Semua target disini
+        public static IList<List<ColorTarget>> ReadCollectionFruit = CollectionFruit.AsReadOnly(); // Aksesible oleh luah
 
         // Data objek yang ditarget
         private VisualTargetSelection? objectTarget;
-        private int[] targetRange = new int[6];
+        private int[] targetColorRange = new int[6];
         private List<int[]> rejectedRange = new List<int[]> { };
 
         // Buat yang terpilih
         private string terpilih = "";
         public ColorTarget? warnaDipilih { private set; get; }
         public List<ColorTarget>? targetDipilih { private set; get; }
+
+        public void SetWarnaDipilih(string terpilih)
+        {
+            if(targetDipilih== null)
+            {
+                throw new Exception("targetDipilih is null, cannot continue process");
+            }
+            for (int i= 0 ; i < targetDipilih.Count(); i++)
+            {
+                if(targetDipilih.ElementAt(i).ColorName == terpilih)
+                {
+                    warnaDipilih = targetDipilih[i];
+                    break;
+                }
+            } 
+        }
 
         public void SettVisualTargetSelection (VisualTargetSelection? selection)
         {
@@ -79,7 +102,7 @@ namespace Visual_Object
 
         public int[] GetTargetColor ()
         {
-            return targetRange;
+            return targetColorRange;
         }
 
         public void SetTargetColor()
@@ -93,7 +116,7 @@ namespace Visual_Object
                 throw new Exception("Null Class targetDipilih");
             }
 
-            targetRange = warnaDipilih.hsvBound;
+            targetColorRange = warnaDipilih.hsvBound;
             terpilih = warnaDipilih.ColorName;
 
             for (int i= 0; i < targetDipilih.Count; i++)
@@ -102,6 +125,11 @@ namespace Visual_Object
 
                 rejectedRange.Add(targetDipilih.ElementAt(i).hsvBound);
             }
+        }
+
+        public List<int[]> GetRejectedRange()
+        {
+            return this.rejectedRange;
         }
 
     }
