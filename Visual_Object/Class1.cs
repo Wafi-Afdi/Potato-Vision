@@ -20,12 +20,12 @@ namespace Visual_Object
         private VisualTargetSelection objectTarget;
         private int[] targetRange = new int[6];
 
-        public void SettVisualTargetSelection (VisualTargetSelection selection)
+        public void SetVisualTargetSelection (VisualTargetSelection selection)
         {
             objectTarget= selection;    
         }
 
-        public VisualTargetSelection GetTargetVisualSelection ()
+        public VisualTargetSelection GetVisualTargetSelection ()
         {
             return objectTarget;
         }
@@ -85,14 +85,14 @@ namespace Visual_Object
     public class SaveData
     {
 
-        public int AcceptView { get; set; }
-        public int RejectView { get; set; }
+        public int acceptView { get; set; }
+        public int rejectView { get; set; }
 
-        public int total { get; private set; }
+        public int totalView { get; private set; }
 
         public void Total()
         {
-            total = this.AcceptView + this.RejectView;
+            totalView = this.acceptView + this.rejectView;
         }
 
 

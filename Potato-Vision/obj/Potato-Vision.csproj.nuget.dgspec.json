@@ -48,6 +48,20 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.23.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -72,10 +86,10 @@
       }
     },
     "D:\\Visual Studio\\Projects\\Git data buah\\Visual_Object\\Visual_Object.csproj": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "restore": {
         "projectUniqueName": "D:\\Visual Studio\\Projects\\Git data buah\\Visual_Object\\Visual_Object.csproj",
-        "projectName": "Visual_Object",
+        "projectName": "VisualObject_PBO_23",
         "projectPath": "D:\\Visual Studio\\Projects\\Git data buah\\Visual_Object\\Visual_Object.csproj",
         "packagesPath": "C:\\Users\\alber\\.nuget\\packages\\",
         "outputPath": "D:\\Visual Studio\\Projects\\Git data buah\\Visual_Object\\obj\\",
