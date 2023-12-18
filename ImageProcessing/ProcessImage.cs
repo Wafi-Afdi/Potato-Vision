@@ -79,7 +79,7 @@ namespace ImageProcessing
             foreach (var contour in contours)
             {
                 double area = Cv2.ContourArea(contour);
-                if (area < 100) continue;
+                if (area < 5000) continue;
 
                 Rect boundingBox = Cv2.BoundingRect(contour);
                 Cv2.Rectangle(this._annotatedImage!, boundingBox, scalar, 2);
