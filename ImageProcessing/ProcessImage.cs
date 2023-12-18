@@ -116,7 +116,7 @@ namespace ImageProcessing
                 this._rejectedBinaryImage.Add(this.Segment(range_t));
             }
 
-            this._acceptedCount = this.CreateContourAndDrawBoundingBox(this._acceptedBinaryImage, Scalar.Blue, true);
+            this._acceptedCount = this.CreateContourAndDrawBoundingBox(this._acceptedBinaryImage, Scalar.Green, true);
             foreach (Mat binaries in this._rejectedBinaryImage)
             {
                 this._rejectedCount = this.CreateContourAndDrawBoundingBox(binaries, Scalar.Red, false);
