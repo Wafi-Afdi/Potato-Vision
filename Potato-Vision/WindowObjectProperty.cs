@@ -28,6 +28,7 @@ namespace Potato_Vision
         private string _acceptedObject = "-";
         private string _rejectedObject = "-";
         private string _totalObject = "-";
+        private string _titleImage = "";
 
         private ObservableCollection<string> _selectWarnaList = new ObservableCollection<string>() { };
 
@@ -115,30 +116,40 @@ namespace Potato_Vision
         public string TotalAccept
         {
             get { return _totalObject; }
-            private set
+            set
             {
                 _totalObject = value;
-                OnPropertyChanged("TotalAccept");
+                OnPropertyChanged();
             }
         }
 
         public string RejectedObjectCount
         {
             get { return _rejectedObject; }
-            private set
+            set
             {
-                _totalObject = value;
-                OnPropertyChanged("RejectedObjectCount");
+                _rejectedObject = value;
+                OnPropertyChanged();
             }
         }
 
         public string AcceptedObjectCount
         {
             get { return _acceptedObject; }
-            private set
+            set
             {
-                _totalObject = value;
-                OnPropertyChanged("AcceptedObjectCount");
+                _acceptedObject = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ImageTitle
+        {
+            get { return _titleImage; }
+            set
+            {
+                _titleImage = value;
+                OnPropertyChanged("ImageTitle");
             }
         }
 
@@ -151,52 +162,17 @@ namespace Potato_Vision
             else StartButton = false;
         }
 
-        private void UpdateTotal()
+        public void ClearAllResultUI()
         {
-            int? reject_real;
-            int? accept_real;
-            int reject;
-            int accept;
-            int? total;
-            if (int.TryParse(this._rejectedObject, out reject)) {
-                reject_real = reject;
-            }    
-            else reject_real = null;
-
-            if (int.TryParse(this._acceptedObject, out accept))
-            {
-                accept_real = accept;
-            }
-            else accept_real = null;
-
-            if (reject_real == null)
-            {
-                if(accept_real == null)
-                {
-                    total = null;
-                }
-                total = accept_real;
-            } 
-            else if (accept_real == null)
-            {
-                if (reject_real == null)
-                {
-                    total = null;
-                }
-                total = reject_real;
-            }
-            else
-            {
-                total = reject_real + accept_real;
-            }
-
-            if (total == null)
-            {
-                
-            }
-            else TotalAccept = total.ToString();
-
+            RejectedObjectCount = "-";
+            AcceptedObjectCount = "-";
+            TotalAccept = "-";
+            Done_Visibility = System.Windows.Visibility.Collapsed;
         }
+
+
+
+        
 
     }
 

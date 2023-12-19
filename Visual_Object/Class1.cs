@@ -116,6 +116,7 @@ namespace Visual_Object
                 throw new Exception("Null Class targetDipilih");
             }
 
+            rejectedRange.Clear();
             targetColorRange = warnaDipilih.hsvBound;
             terpilih = warnaDipilih.ColorName;
 
