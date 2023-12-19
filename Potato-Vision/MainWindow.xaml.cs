@@ -35,6 +35,7 @@ namespace Potato_Vision
             DataColumn reject = new DataColumn("Reject", typeof(int));
             DataColumn total = new DataColumn("Total", typeof(int));
 
+
             dt.Columns.Add(id);
             dt.Columns.Add(name);
             dt.Columns.Add(accept);
