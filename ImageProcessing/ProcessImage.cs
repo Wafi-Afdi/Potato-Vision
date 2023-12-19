@@ -108,6 +108,8 @@ namespace ImageProcessing
 
         private void Processing()
         {
+            this._rejectedCount = 0;
+
             this._acceptedBinaryImage = this.Segment(_acceptedRange!).Clone();
             this._rejectedBinaryImage = new();
 
@@ -119,7 +121,7 @@ namespace ImageProcessing
             this._acceptedCount = this.CreateContourAndDrawBoundingBox(this._acceptedBinaryImage, Scalar.Green, true);
             foreach (Mat binaries in this._rejectedBinaryImage)
             {
-                this._rejectedCount = this.CreateContourAndDrawBoundingBox(binaries, Scalar.Red, false);
+                this._rejectedCount += this.CreateContourAndDrawBoundingBox(binaries, Scalar.Red, false);
             }
 
             this.SetIndices();
