@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Potato-Vision", "Potato-Vis
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Visual_Object", "Visual_Object\Visual_Object.csproj", "{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDBProject", "MongoDB\MongoDBProject.csproj", "{EB189FAB-C791-4EB1-AB1E-0FCF26C879EF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D5B6F95E-A4CB-4DFB-A985-DA31C292047C} = {D5B6F95E-A4CB-4DFB-A985-DA31C292047C}
+	EndProjectSection
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing", "ImageProcessing\ImageProcessing.csproj", "{064814E0-67DE-4EA0-8160-92D27CE18C3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingTest", "ImageProcessingTest\ImageProcessingTest.csproj", "{F0D7ABD9-5406-4C76-8DF8-EAF9C08DBF18}"
@@ -25,6 +29,10 @@ Global
 		{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB189FAB-C791-4EB1-AB1E-0FCF26C879EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB189FAB-C791-4EB1-AB1E-0FCF26C879EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB189FAB-C791-4EB1-AB1E-0FCF26C879EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB189FAB-C791-4EB1-AB1E-0FCF26C879EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{064814E0-67DE-4EA0-8160-92D27CE18C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{064814E0-67DE-4EA0-8160-92D27CE18C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{064814E0-67DE-4EA0-8160-92D27CE18C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU

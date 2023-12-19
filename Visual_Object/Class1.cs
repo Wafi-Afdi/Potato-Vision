@@ -141,11 +141,11 @@ namespace Visual_Object
         public int AcceptView;
         public int RejectView;
 
-        public int total { get; private set; }
+        public int totalView { get; private set; }
 
         public void Total()
         {
-            total = this.AcceptView + this.RejectView;
+            totalView = this.acceptView + this.rejectView;
         }
 
 

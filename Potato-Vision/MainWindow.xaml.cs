@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
@@ -218,6 +219,25 @@ namespace Potato_Vision
             {
                 Debug.WriteLine(ex.Message);
             }
+        }
+
+        void FillDataTable()
+        {
+            DataTable dt = new DataTable();
+            DataColumn id = new DataColumn("ID", typeof(string));
+            DataColumn name = new DataColumn("File Name", typeof(string));
+            DataColumn accept = new DataColumn("Accept", typeof(int));
+            DataColumn reject = new DataColumn("Reject", typeof(int));
+            DataColumn total = new DataColumn("Total", typeof(int));
+
+
+            dt.Columns.Add(id);
+            dt.Columns.Add(name);
+            dt.Columns.Add(accept);
+            dt.Columns.Add(reject);
+            dt.Columns.Add(total);
+
+            //Yang diatas ini buat nunjukin kolom2 data gridnya, nah sekarang tinggal masukin daftarnya gimana
         }
     }
 }
