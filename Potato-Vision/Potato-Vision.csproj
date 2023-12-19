@@ -16,13 +16,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="4co4m2.png" />
+    <None Remove="636b5765126337.5b0aa701b50d3.jpg" />
+    <None Remove="warning.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing\ImageProcessing.csproj" />
     <ProjectReference Include="..\Visual_Object\Visual_Object.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector NET 8.2.0\MySql.Data.dll</HintPath>
-    </Reference>
+    <Resource Include="4co4m2.png" />
+    <Resource Include="636b5765126337.5b0aa701b50d3.jpg" />
+    <Resource Include="warning.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Image\warning.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
