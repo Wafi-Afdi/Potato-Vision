@@ -28,11 +28,13 @@ namespace Potato_Vision
     {
 
         private BitmapImage? ImageBrowsed;
+
+        // komponen based model
         private UIModel _uiModel = new UIModel();
-
         private ProcessImage _processImage;
-
         private TargetObject _targetVisual;
+        private SaveData _saveData;
+
         private IList<List<ColorTarget>> collectionInApp = new List<List<ColorTarget>>() { };
         private List<ColorTarget> colorSelection = new List<ColorTarget>() { };
 
@@ -40,6 +42,8 @@ namespace Potato_Vision
         // Data untuk processing image
         private List<int[]> rejectedList = new List<int[]> { };
         private int[] accepted = new int[6];
+
+        
 
         static BitmapImage ConvertBitmapToBitmapImage(System.Drawing.Bitmap bitmap)
         {
@@ -68,7 +72,7 @@ namespace Potato_Vision
             //List<int[]> rejectedList = new List<int[]> { rejected1 };
 
             // _processImage = new ProcessImage(accepted, rejectedList, ColorSpaceMethod.HSV);
-            _processImage = new ProcessImage();
+           
             // 
 
 
@@ -79,6 +83,9 @@ namespace Potato_Vision
 
 
             _targetVisual = new TargetObject();
+            _processImage = new ProcessImage();
+            _saveData = new SaveData();
+
             collectionInApp = TargetObject.ReadCollectionFruit;
 
         }
@@ -94,8 +101,8 @@ namespace Potato_Vision
 
             if (response == true)
             {
+                _uiModel.ClearAllResultUI();
                 _uiModel.FilePath = openFileDialog.FileName;
-                _uiModel.Done_Visibility = Visibility.Hidden;
 
                 ImageBrowsed = new BitmapImage(new Uri(_uiModel.FilePath));
                 // ImageBrowsed = ConvertBitmapToBitmapImage(_processImage.GetAnnotatedBitmapImage());
@@ -117,6 +124,7 @@ namespace Potato_Vision
             {
                 MessageBox.Show("Please Browse an Image First");
             }
+            _uiModel.Done_Visibility = Visibility.Hidden;
 
             // Loading 
             Image_Display.Visibility = System.Windows.Visibility.Hidden;
@@ -140,7 +148,15 @@ namespace Potato_Vision
             _uiModel.Done_Visibility = Visibility.Visible;
 
             // Perhitungan
+            _saveData.AcceptView = _processImage.GetAcceptedCount();
+            _saveData.RejectView = _processImage.GetRejectedCount();
+            _saveData.Total();
 
+
+            // update ui hasil
+            _uiModel.RejectedObjectCount = _saveData.AcceptView.ToString();
+            _uiModel.AcceptedObjectCount = _saveData.RejectView.ToString();
+            _uiModel.TotalAccept = _saveData.total.ToString();
         }
         private void Save_Image(object sender, RoutedEventArgs e)
         {
@@ -171,9 +187,9 @@ namespace Potato_Vision
         // Fungsi untuk mengubah target terpilih pada dropdown box 
         private void ChangeSelection(object sender, SelectionChangedEventArgs e)
         {
+            _uiModel.ClearAllResultUI();
             _uiModel.SelectWarnaList.Clear();
             _uiModel.SelectedTarget = (VisualTargetSelection)TargetComboBox.SelectedItem;
-            Debug.WriteLine(_uiModel.SelectedTarget);
             _targetVisual.SettVisualTargetSelection(_uiModel.SelectedTarget);
 
 
@@ -192,10 +208,10 @@ namespace Potato_Vision
 
         private void UbahTargetWarna(object sender, SelectionChangedEventArgs e)
         {
+            _uiModel.ClearAllResultUI();
             try
             {
                 _uiModel.SelectedColor = (String)WarnaComboBox.SelectedItem;
-                Debug.WriteLine(_uiModel.SelectedColor);
                 _targetVisual.SetWarnaDipilih(_uiModel.SelectedColor);
             }
             catch (Exception ex)
