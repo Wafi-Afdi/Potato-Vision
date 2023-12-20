@@ -21,10 +21,12 @@ namespace Potato_Vision
     {
         private bool _startButton;
         private bool _warnaDropdown;
+        private bool _saveDropdown;
+        private bool _uploadDropdown;
         private System.Windows.Visibility _done_display = System.Windows.Visibility.Hidden;
         private string? _selectedColor = null;
         private string? _filepath = null;
-        private VisualTargetSelection? _selectedTarget = null;
+        private VisualTargetSelection _selectedTarget;
         private string _acceptedObject = "-";
         private string _rejectedObject = "-";
         private string _totalObject = "-";
@@ -43,6 +45,26 @@ namespace Potato_Vision
             {
                 _startButton = value;
                 OnPropertyChanged("StartButton");
+            }
+        }
+
+        public bool SaveDropdownBool
+        {
+            get { return _saveDropdown; }
+            set
+            {
+                _saveDropdown = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool UploadDropdownBool
+        {
+            get { return _uploadDropdown; }
+            set
+            {
+                _uploadDropdown = value;
+                OnPropertyChanged();
             }
         }
 
@@ -92,7 +114,7 @@ namespace Potato_Vision
             }
         }
 
-        public VisualTargetSelection? SelectedTarget
+        public VisualTargetSelection SelectedTarget
         {
             get { return _selectedTarget; }
             set
@@ -155,7 +177,7 @@ namespace Potato_Vision
 
         private void CheckCanStart()
         {
-            if (_selectedColor != null && _selectedTarget != null && _filepath != null)
+            if (_selectedColor != null  && _filepath != null)
             {
                 StartButton = true;
             }
@@ -168,6 +190,8 @@ namespace Potato_Vision
             AcceptedObjectCount = "-";
             TotalAccept = "-";
             Done_Visibility = System.Windows.Visibility.Collapsed;
+            SaveDropdownBool = false;
+            UploadDropdownBool = false;
         }
 
 

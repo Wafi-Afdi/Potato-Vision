@@ -18,6 +18,8 @@ using System.Windows.Shapes;
 using ImageProcessing;
 using Microsoft.Win32;
 using Visual_Object;
+using MongoDBProject;
+using System.Reflection;
 
 namespace Potato_Vision
 {
@@ -34,6 +36,7 @@ namespace Potato_Vision
         private ProcessImage _processImage;
         private TargetObject _targetVisual;
         private SaveData _saveData;
+        private UploadDB _DBManager;
 
         private IList<List<ColorTarget>> collectionInApp = new List<List<ColorTarget>>() { };
         private List<ColorTarget> colorSelection = new List<ColorTarget>() { };
@@ -62,6 +65,24 @@ namespace Potato_Vision
             return bitmapImage;
         }
 
+        static bool CheckFileSize(string filepath)
+        {
+            FileInfo fileinfo = new FileInfo(filepath);
+            // Get the file size in bytes
+            long fileSizeInBytes = fileinfo.Length;
+
+            // Convert bytes to kilobytes (1 KB = 1024 bytes) or megabytes (1 MB = 1024 KB)
+            double fileSizeInKb = fileSizeInBytes / 1024.0;
+            double fileSizeInMb = fileSizeInKb / 1024.0;
+
+            if(fileSizeInKb > 2024) {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
+
         public MainWindow()
         {
 
@@ -85,6 +106,7 @@ namespace Potato_Vision
             _targetVisual = new TargetObject();
             _processImage = new ProcessImage();
             _saveData = new SaveData();
+            _DBManager = new UploadDB();
 
             collectionInApp = TargetObject.ReadCollectionFruit;
 
@@ -157,6 +179,8 @@ namespace Potato_Vision
             _uiModel.RejectedObjectCount = _saveData.AcceptView.ToString();
             _uiModel.AcceptedObjectCount = _saveData.RejectView.ToString();
             _uiModel.TotalAccept = _saveData.total.ToString();
+            _uiModel.UploadDropdownBool= true;
+            _uiModel.SaveDropdownBool= true;
         }
         private void Save_Image(object sender, RoutedEventArgs e)
         {
@@ -187,28 +211,21 @@ namespace Potato_Vision
         // Fungsi untuk mengubah target terpilih pada dropdown box 
         private void ChangeSelection(object sender, SelectionChangedEventArgs e)
         {
-            _uiModel.ClearAllResultUI();
             _uiModel.SelectWarnaList.Clear();
             _uiModel.SelectedTarget = (VisualTargetSelection)TargetComboBox.SelectedItem;
             _targetVisual.SettVisualTargetSelection(_uiModel.SelectedTarget);
 
-
-            if (_uiModel.SelectedTarget.HasValue)
+            // Allow select pada warna
+            colorSelection = collectionInApp.SelectMany(fruitList => fruitList.Where(target => target.target == _uiModel.SelectedTarget)).ToList();
+            foreach (ColorTarget color in colorSelection)
             {
-                // Allow select pada warna
-                colorSelection = collectionInApp.SelectMany(fruitList => fruitList.Where(target => target.target == _uiModel.SelectedTarget)).ToList();
-
-                foreach (ColorTarget color in colorSelection)
-                {
-                    _uiModel.SelectWarnaList.Add(color.ColorName);
-                }
-                _uiModel.WarnaDropdownBool = true;
+                _uiModel.SelectWarnaList.Add(color.ColorName);
             }
+            _uiModel.WarnaDropdownBool = true;
         }
 
         private void UbahTargetWarna(object sender, SelectionChangedEventArgs e)
         {
-            _uiModel.ClearAllResultUI();
             try
             {
                 _uiModel.SelectedColor = (String)WarnaComboBox.SelectedItem;
@@ -218,6 +235,43 @@ namespace Potato_Vision
             {
                 Debug.WriteLine(ex.Message);
             }
+        }
+
+        private async void Upload_Image(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if(!CheckFileSize(_uiModel.FilePath!))
+                {
+                    MessageBox.Show("Size is above the limit", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                string title = _uiModel.ImageTitle;
+                int accept = _saveData.AcceptView;
+                int reject = _saveData.RejectView;
+                int total = _saveData.total;
+                string buah = _targetVisual.GetTargetVisualSelection().ToString();
+                string warnaterpilih = _targetVisual.GetWarnaTerpilih();
+
+                if(title == "")
+                {
+                    MessageBox.Show("Please Enter A Title", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                PotatoModel uploaded = new PotatoModel(title, accept, reject, buah, warnaterpilih, _processImage.GetAnnotatedBitmapImage(),DateTime.Now);
+                
+                await _DBManager.Create(uploaded);
+
+                MessageBox.Show("Upload successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("Upload failed", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
     }
 }

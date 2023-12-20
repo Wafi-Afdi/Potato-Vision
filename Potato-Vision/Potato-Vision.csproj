@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing\ImageProcessing.csproj" />
+    <ProjectReference Include="..\MongoDB\MongoDBProject.csproj" />
     <ProjectReference Include="..\Visual_Object\Visual_Object.csproj" />
   </ItemGroup>
 

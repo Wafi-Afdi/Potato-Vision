@@ -53,7 +53,7 @@ namespace Visual_Object
         public static IList<List<ColorTarget>> ReadCollectionFruit = CollectionFruit.AsReadOnly(); // Aksesible oleh luah
 
         // Data objek yang ditarget
-        private VisualTargetSelection? objectTarget;
+        private VisualTargetSelection objectTarget;
         private int[] targetColorRange = new int[6];
         private List<int[]> rejectedRange = new List<int[]> { };
 
@@ -78,7 +78,7 @@ namespace Visual_Object
             } 
         }
 
-        public void SettVisualTargetSelection (VisualTargetSelection? selection)
+        public void SettVisualTargetSelection (VisualTargetSelection selection)
         {
             objectTarget = selection;  
             switch(selection)
@@ -89,13 +89,10 @@ namespace Visual_Object
                 case VisualTargetSelection.Grape:
                     targetDipilih = GrapeTarget;
                     break;
-                case null:
-                    targetDipilih = AppleTarget;
-                    break;
             }
         }
 
-        public VisualTargetSelection? GetTargetVisualSelection ()
+        public VisualTargetSelection GetTargetVisualSelection ()
         {
             return objectTarget;
         }
@@ -131,6 +128,11 @@ namespace Visual_Object
         public List<int[]> GetRejectedRange()
         {
             return this.rejectedRange;
+        }
+
+        public string GetWarnaTerpilih()
+        {
+            return this.terpilih;
         }
 
     }
