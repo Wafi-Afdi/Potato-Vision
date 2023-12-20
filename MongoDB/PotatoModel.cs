@@ -32,7 +32,7 @@ public class PotatoModel
 
         return SigBase64;
     }
-    public PotatoModel(string title, int accept, int reject, string buah, string warna, Bitmap bitmap, DateTime waktu)
+    public PotatoModel(string title, int total, int accept, int reject, string buah, string warna, Bitmap bitmap, DateTime waktu)
     {
         Title = title;
         Accept = accept;
@@ -41,5 +41,6 @@ public class PotatoModel
         Warna = warna;
         Bitmap = convertbitmap(bitmap);
         Waktu = waktu;
+        Total = total;
     }
 }

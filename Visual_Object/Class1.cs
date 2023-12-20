@@ -11,7 +11,7 @@ namespace Visual_Object
     public enum VisualTargetSelection
     {
         Apple,
-        Grape,
+        Paprika,
     }
 
     public class ColorTarget
@@ -38,18 +38,22 @@ namespace Visual_Object
     {
         // Taruh HSV Bound Disini
         // Statik variable untuk dipakai
-        private static int[] RedAppleBound = { 28, 30, 32, 36, 255, 255 };
-        private static int[] GreenAppleBound = { 171, 74, 56, 255, 255, 255 };
+        private static int[] RedAppleBound = { 171, 74, 56, 255, 255, 255 };
+        private static int[] GreenAppleBound = { 28, 30, 32, 36, 255, 255 };
         private static ColorTarget RedApple = new ColorTarget(VisualTargetSelection.Apple, RedAppleBound, "Red");
         private static ColorTarget GreenApple = new ColorTarget(VisualTargetSelection.Apple, GreenAppleBound, "Green");
 
-        private static ColorTarget YellowGrape = new ColorTarget(VisualTargetSelection.Grape, RedAppleBound, "Yellow");
-        private static ColorTarget GreenGrape = new ColorTarget(VisualTargetSelection.Grape, GreenAppleBound, "Green");
+        private static int[] RedPaprikaBound = { 0, 55, 120, 10, 255, 255 };
+        private static int[] GreenPaprikaBound = { 38, 35, 0, 50, 255, 255 };
+        private static int[] YellowPaprikaBound = { 17, 45, 230, 25, 230, 255 };
+        private static ColorTarget RedPaprika = new ColorTarget(VisualTargetSelection.Paprika, RedPaprikaBound, "Red");
+        private static ColorTarget GreenPaprika = new ColorTarget(VisualTargetSelection.Paprika, GreenPaprikaBound, "Green");
+        private static ColorTarget YellowPaprika = new ColorTarget(VisualTargetSelection.Paprika, YellowPaprikaBound, "Yellow");
 
         private static List<ColorTarget> AppleTarget = new List<ColorTarget> { RedApple, GreenApple }; // Target List untuk Apple
-        private static List<ColorTarget> GrapeTarget = new List<ColorTarget> { YellowGrape, GreenGrape }; // Target List untuk anggur
+        private static List<ColorTarget> PaprikaTarget = new List<ColorTarget> { RedPaprika, GreenPaprika, YellowPaprika }; // Target List untuk anggur
 
-        public static List<List<ColorTarget>> CollectionFruit = new List<List<ColorTarget>>() { AppleTarget, GrapeTarget}; // Koleksi Semua target disini
+        public static List<List<ColorTarget>> CollectionFruit = new List<List<ColorTarget>>() { AppleTarget, PaprikaTarget}; // Koleksi Semua target disini
         public static IList<List<ColorTarget>> ReadCollectionFruit = CollectionFruit.AsReadOnly(); // Aksesible oleh luah
 
         // Data objek yang ditarget
@@ -86,8 +90,8 @@ namespace Visual_Object
                 case VisualTargetSelection.Apple:
                     targetDipilih = AppleTarget;
                     break;
-                case VisualTargetSelection.Grape:
-                    targetDipilih = GrapeTarget;
+                case VisualTargetSelection.Paprika:
+                    targetDipilih = PaprikaTarget;
                     break;
             }
         }

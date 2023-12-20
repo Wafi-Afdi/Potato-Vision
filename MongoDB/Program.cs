@@ -11,7 +11,7 @@ var client = new MongoClient(connectionString);
 var db = client.GetDatabase(databaseName);
 var collection = db.GetCollection<PotatoModel>(collectionName);
 
-var potato = new PotatoModel("Foto2", 2, 3, "Apel", "Warna", (Bitmap)Image.FromFile(@"F:\Download\F4NdwMwaQAEFC_e.bmp"), DateTime.Now);
+var potato = new PotatoModel("Foto2",5, 2, 3, "Apel", "Warna", (Bitmap)Image.FromFile(@"F:\Download\F4NdwMwaQAEFC_e.bmp"), DateTime.Now);
 
 await collection.InsertOneAsync(potato);
 

@@ -259,7 +259,7 @@ namespace Potato_Vision
                     return;
                 }
 
-                PotatoModel uploaded = new PotatoModel(title, accept, reject, buah, warnaterpilih, _processImage.GetAnnotatedBitmapImage(),DateTime.Now);
+                PotatoModel uploaded = new PotatoModel(title, total, accept, reject, buah, warnaterpilih, _processImage.GetAnnotatedBitmapImage(),DateTime.Now);
                 
                 await _DBManager.Create(uploaded);
 
