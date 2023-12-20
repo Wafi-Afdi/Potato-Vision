@@ -176,8 +176,8 @@ namespace Potato_Vision
 
 
             // update ui hasil
-            _uiModel.RejectedObjectCount = _saveData.AcceptView.ToString();
-            _uiModel.AcceptedObjectCount = _saveData.RejectView.ToString();
+            _uiModel.RejectedObjectCount = _saveData.RejectView.ToString();
+            _uiModel.AcceptedObjectCount = _saveData.AcceptView.ToString();
             _uiModel.TotalAccept = _saveData.total.ToString();
             _uiModel.UploadDropdownBool= true;
             _uiModel.SaveDropdownBool= true;
