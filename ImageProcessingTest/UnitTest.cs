@@ -13,6 +13,7 @@ namespace ImageProcessingTest
 
     public interface ITest
     {
+        ProcessImage GetInstance();
         void AcceptedCountTest();
         void RejectedCountTest();
         void AcceptedIndicesTest();
