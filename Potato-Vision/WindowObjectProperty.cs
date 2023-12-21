@@ -200,11 +200,6 @@ namespace Potato_Vision
 
     }
 
-    class MainModel
-    {
-
-    }
-
 
     class ObservableObject : INotifyPropertyChanged
     {

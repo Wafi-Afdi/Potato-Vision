@@ -53,7 +53,7 @@ namespace Visual_Object
         private static List<ColorTarget> AppleTarget = new List<ColorTarget> { RedApple, GreenApple }; // Target List untuk Apple
         private static List<ColorTarget> PaprikaTarget = new List<ColorTarget> { RedPaprika, GreenPaprika, YellowPaprika }; // Target List untuk anggur
 
-        public static List<List<ColorTarget>> CollectionFruit = new List<List<ColorTarget>>() { AppleTarget, PaprikaTarget}; // Koleksi Semua target disini
+        private static List<List<ColorTarget>> CollectionFruit = new List<List<ColorTarget>>() { AppleTarget, PaprikaTarget}; // Koleksi Semua target disini
         public static IList<List<ColorTarget>> ReadCollectionFruit = CollectionFruit.AsReadOnly(); // Aksesible oleh luah
 
         // Data objek yang ditarget
@@ -77,9 +77,10 @@ namespace Visual_Object
                 if(targetDipilih.ElementAt(i).ColorName == terpilih)
                 {
                     warnaDipilih = targetDipilih[i];
-                    break;
+                    return;
                 }
-            } 
+            }
+            throw new Exception("Invalid Color");
         }
 
         public void SettVisualTargetSelection (VisualTargetSelection selection)
