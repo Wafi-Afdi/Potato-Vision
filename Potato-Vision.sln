@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Potato-Vision", "Potato-Vision\Potato-Vision.csproj", "{465C2DF7-914E-40E9-9BB4-FE0F4FA2C63E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bing-Chilling", "Potato-Vision\Bing-Chilling.csproj", "{465C2DF7-914E-40E9-9BB4-FE0F4FA2C63E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Visual_Object", "Visual_Object\Visual_Object.csproj", "{D5B6F95E-A4CB-4DFB-A985-DA31C292047C}"
 EndProject
