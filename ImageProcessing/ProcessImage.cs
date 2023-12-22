@@ -22,7 +22,7 @@ namespace ImageProcessing
         private Mat? _acceptedBinaryImage;
         private List<Mat>? _rejectedBinaryImage;
 
-        public List<int> _acceptedXPosition;
+        private List<int> _acceptedXPosition;
         private List<int> _rejectedXPosition;
 
         private List<int>? _acceptedIndices;
